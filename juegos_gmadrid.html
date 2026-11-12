@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon"
+type="image/svg+xml"
+href='data:image/svg+xml,
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<rect y="0" width="64" height="10.6" fill="%23e40303"/>
+<rect y="10.6" width="64" height="10.6" fill="%23ff8c00"/>
+<rect y="21.2" width="64" height="10.6" fill="%23ffed00"/>
+<rect y="31.8" width="64" height="10.6" fill="%23008026"/>
+<rect y="42.4" width="64" height="10.6" fill="%230044d4"/>
+<rect y="53" width="64" height="11" fill="%23750087"/>
+<rect x="12" y="12" width="40" height="40" rx="8" fill="white" stroke="black" stroke-width="3"/>
+<circle cx="22" cy="22" r="3.5" fill="black"/>
+<circle cx="42" cy="22" r="3.5" fill="black"/>
+<circle cx="32" cy="32" r="3.5" fill="black"/>
+<circle cx="22" cy="42" r="3.5" fill="black"/>
+<circle cx="42" cy="42" r="3.5" fill="black"/>
+</svg>'>
+
+<title>Propuestas de Juegos - GMadrid</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    color: #333;
+}
+
+main{
+    width: 100%;
+    max-width: 1000px;
+}
+
+.header-principal {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 10px;
+}
+
+.header-principal h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+
+.header-principal h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #0078d4;
+    margin: 0;
+    display: inline-block;
+    background: rgba(0, 120, 212, 0.08);
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+/* Footer informativo llamativo */
+.footer-informativo {
+    background: linear-gradient(135deg, #f0f7ff 0%, #e6f0fa 100%);
+    border: 1px solid #b3d7ff;
+    padding: 16px 20px;
+    border-radius: 12px;
+    text-align: center;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 120, 212, 0.06);
+}
+
+.footer-informativo p {
+    margin: 0;
+    font-size: 14px;
+    color: #1e293b;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.container{
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    border: 1px solid #eaeaea;
+}
+
+/* Estilos para el acordeón (details / summary) */
+details.container summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 18px;
+    list-style: none;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+details.container summary::-webkit-details-marker {
+    display: none;
+}
+
+details.container summary::before {
+    content: "▶ ";
+    font-size: 14px;
+    color: #0078d4;
+    transition: transform 0.2s;
+}
+
+details.container[open] summary::before {
+    content: "▼ ";
+}
+
+details.container[open] {
+    padding-bottom: 30px;
+}
+
+.container-table{
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.container label {
+    display: flex;
+    font-weight: 600;
+    font-size: 14px;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+input,
+select,
+textarea{
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #fafbfc;
+    transition: all 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #0078d4;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+}
+
+textarea{
+    resize: vertical;
+}
+
+button{
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #0078d4;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover:not(:disabled){
+    background: #005a9e;
+}
+
+button:active:not(:disabled) {
+    transform: scale(0.99);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Alerta flotante fija arriba */
+#mensaje {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 90%;
+    max-width: 600px;
+    font-weight: 600;
+    text-align: left;
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    display: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-sizing: border-box;
+}
+
+.mensaje-contenido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.btn-cerrar-mensaje {
+    background: transparent;
+    border: 1px solid transparent;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 2px 8px;
+    margin: 0;
+    width: auto;
+    line-height: 1;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+/* Efectos hover dinámicos adaptados al color de la alerta */
+#mensaje[style*="background: rgb(220"] .btn-cerrar-mensaje:hover {
+    background: rgba(22, 163, 74, 0.15);
+    border-color: rgba(22, 163, 74, 0.3);
+}
+
+#mensaje[style*="background: rgb(239"] .btn-cerrar-mensaje:hover,
+#mensaje[style*="background: rgb(240"] .btn-cerrar-mensaje:hover,
+#mensaje[style*="background: rgb(254"] .btn-cerrar-mensaje:hover {
+    background: rgba(217, 119, 6, 0.15);
+    border-color: rgba(217, 119, 6, 0.3);
+}
+
+#mensaje[style*="background: rgb(255"] .btn-cerrar-mensaje:hover {
+    background: rgba(220, 38, 38, 0.15);
+    border-color: rgba(220, 38, 38, 0.3);
+}
+
+/* Filtros por día */
+.filtros-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.btn-filtro {
+    flex: 1;
+    margin-top: 0;
+    background: #f0f2f5;
+    color: #555;
+    font-weight: bold;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+    transition: all 0.2s;
+}
+
+.btn-filtro:hover {
+    color: #fff;
+}
+
+.btn-filtro.activo {
+    background: #0078d4;
+    color: white;
+    border-color: #0078d4;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    min-width: 500px;
+}
+
+th, td{
+    border: 1px solid #eee;
+    padding: 12px;
+    text-align: left;
+    font-size: 14px;
+}
+
+th{
+    background: #0078d4;
+    color: white;
+    font-weight: 600;
+}
+
+tr:nth-child(even){
+    background: #f8fafc;
+}
+
+#formJuego{
+    display: none;
+    margin-top: 1.5rem;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.acciones-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.opcion-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 0 !important;
+}
+
+.opcion-card:hover {
+    background: #f1f5f9;
+    border-color: #0078d4;
+}
+
+.opcion-card input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #0078d4;
+    cursor: pointer;
+    margin: 0;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 16px;
+    background: #f0f7ff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #bde0fe;
+    cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #0078d4;
+    cursor: pointer;
+    margin: 0;
+}
+
+.checkbox-texto {
+    font-size: 14px;
+    color: #005a9e;
+    font-weight: 600;
+    margin: 0;
+}
+
+.opcion-texto {
+    font-size: 14px;
+    color: #334155;
+    font-weight: 600;
+}
+
+select option:disabled {
+    color: #aaa;
+    background-color: #f1f1f1;
+}
+
+.btn-tabla {
+    padding: 6px 12px;
+    font-size: 12px;
+    margin-top: 0;
+    width: 100%;
+    border-radius: 6px;
+}
+.btn-unirse { background: #10b981; color: white; }
+.btn-unirse:hover { background: #059669; }
+
+.btn-salir { background: #f59e0b; color: white; }
+.btn-salir:hover { background: #d97706; }
+
+.btn-editar { background: #0284c7; color: white; }
+.btn-editar:hover { background: #0369a1; }
+
+.btn-eliminar { background: #ef4444; color: white; }
+.btn-eliminar:hover { background: #dc2626; }
+
+.btn-copiar { background: #475569; color: white; }
+.btn-copiar:hover { background: #334155; }
+
+.btn-cancelar-edicion {
+    background: white;
+    margin-top: 10px;
+    border: 1px solid #64748b;
+    color: #353535;
+}
+.btn-cancelar-edicion:hover { background: #475569; color: white; }
+
+.paginacion-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.btn-paginacion {
+    width: auto;
+    margin-top: 0;
+    padding: 8px 16px;
+    font-size: 13px;
+    background: #f0f2f5;
+    color: #333;
+    border: 1px solid #dcdcdc;
+}
+
+.btn-paginacion:hover:not(:disabled) {
+    background: #0078d4;
+    color: white;
+    border-color: #0078d4;
+}
+
+.btn-paginacion:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#infoPaginacion {
+    font-size: 14px;
+    color: #666;
+    font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<!-- Alerta flotante fija arriba -->
+<div id="mensaje">
+    <div class="mensaje-contenido">
+        <span id="textoMensaje"></span>
+        <button class="btn-cerrar-mensaje" onclick="ocultarMensaje()">&times;</button>
+    </div>
+</div>
+
+<main>
+
+<div class="header-principal">
+    <h1>PROPUESTA DE JUEGOS DE MESA 📝</h1>
+    <h2>GMadrid Juegos de Mesa 🏳️‍🌈🎲</h2>
+</div>
+
+<div class="container">
+    <label for="nombre"><b>Nombre de socio (Identifícate para interactuar):</b></label>
+    <select id="nombre" onchange="mostrarFormulario()">
+        <option value="">Selecciona tu nombre</option>
+        <optgroup label="Martes" id="grupoMartes">
+            <option>Álvaro Ascariz</option>
+            <option>Álvaro Barreiro</option>
+            <option>Álvaro de la Parte</option>
+            <option>Álvaro de Mera</option>
+            <option>Álvaro F. Chércoles</option>
+            <option>Álvaro Fernández</option>
+            <option>Álvaro Moreno</option>
+            <option>André</option>
+            <option>Ansel</option>
+            <option>Blanca</option>
+            <option value="Carlos (Martes)">Carlos (Martes)</option>
+            <option>Craig</option>
+            <option>David Horcajada</option>
+            <option>Edu</option>
+            <option>Fer</option>
+            <option>Fran</option>
+            <option>Francesco</option>
+            <option>Iyan</option>
+            <option value="José (Martes)">José (Martes)</option>
+            <option>Juan</option>
+            <option>Kike</option>
+            <option>Manu (México)</option>
+            <option>Manu (Telecinco)</option>
+            <option>Miguel</option>
+            <option>Noli</option>
+            <option>Rubén</option>
+            <option value="Víctor (Martes)">Víctor (Martes)</option>
+            <option>Xavi</option>
+            <option>Yeray</option>
+        </optgroup>
+        <optgroup label="Jueves" id="grupoJueves">
+            <option>Adrián</option>
+            <option>Alberto Carranza</option>
+            <option>Alberto Tesoldi</option>
+            <option>Ángel</option>
+            <option>Beñat</option>
+            <option value="Carlos (Jueves)">Carlos (Jueves)</option>
+            <option>Daniel Alfayate</option>
+            <option>Daniel Gimeno</option>
+            <option>Daniel Sánchez</option>
+            <option>David Rodríguez (Dave)</option>
+            <option>David Rodríguez (Ebri)</option>
+            <option>Diego</option>
+            <option>Ismael</option>
+            <option>Iván</option>
+            <option>Jaime</option>
+            <option value="José (Jueves)">José (Jueves)</option>
+            <option>Koke</option>
+            <option>Lionel</option>
+            <option>Moha</option>
+            <option>Rubén Alonso</option>
+            <option>Toño</option>
+            <option value="Víctor (Jueves)">Víctor (Jueves)</option>
+        </optgroup>
+    </select>
+
+    <div id="formJuego">
+        <div id="contenedorAccionesRadio">
+            <label><b>Acción *</b></label>
+            <div class="acciones-container">
+                <label class="opcion-card">
+                    <input type="radio" name="accion" value="nuevo" checked onchange="cambiarAccion()">
+                    <span class="opcion-texto">➕ Añadir juego de mesa</span>
+                </label>
+                <label class="opcion-card">
+                    <input type="radio" name="accion" value="unirse" onchange="cambiarAccion()">
+                    <span class="opcion-texto">⚔️ Incorporarse a un juego existente</span>
+                </label>
+            </div>
+        </div>
+
+        <div id="bloqueNuevoJuego" style="margin-top: 15px;">
+            <label><b>Nombre del juego *</b></label>
+            <input type="text" id="nombreJuego" placeholder="Ej: Ark Nova">
+
+            <label><b>Número de jugadores *</b></label>
+            <select id="jugadores">
+                <option value="">Selecciona el número máximo de jugadores</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+            </select>
+
+            <label><b>Hora de comienzo</b></label>
+            <input type="time" id="horaComienzo">
+
+            <label><b>Duración (en minutos)</b></label>
+            <input type="number" id="duracion" placeholder="Ejemplo: 120">
+
+            <label><b>Mecánica</b></label>
+            <input type="text" id="mecanica" placeholder="Deckbuilding, draft, eurogame...">
+
+            <label><b>Información adicional</b></label>
+            <textarea id="informacion" rows="4" placeholder="Explicaciones, duración, idioma, etc."></textarea>
+
+            <label><b>Ubicación en el Replay</b></label>
+            <input type="text" id="ubicacion" placeholder="Ejemplo: 143">
+
+            <label class="checkbox-container">
+                <input type="checkbox" id="participarCreador" checked>
+                <span class="checkbox-texto">🙋‍♂️ Participar en el juego como jugador</span>
+            </label>
+
+            <label class="checkbox-container" style="margin-top: 10px;">
+                <input type="checkbox" id="cambiarGrupoExcepcional">
+                <span class="checkbox-texto" id="etiquetaCheckboxGrupo">🔄 Proponer juego de mesa para el otro grupo</span>
+            </label>
+        </div>
+
+        <div id="bloqueUnirse" style="display:none; margin-top: 15px;">
+            <label><b>Juegos disponibles *</b></label>
+            <select id="juegoExistente">
+                <option value="">Selecciona un juego</option>
+            </select>
+        </div>
+
+        <button id="btnRegistrar" onclick="registrarJuego()">Registrar propuesta de juego de mesa</button>
+        <button id="btnCancelarEdicion" class="btn-cancelar-edicion" style="display:none;" onclick="cancelarEdicion()">Cancelar edición del juego de mesa propuesto</button>
+    </div>
+</div>
+
+<!-- Acordeón para los juegos registrados (comienza cerrado por defecto) -->
+<details class="container">
+    <summary>Listado de juegos de mesa registrados para esta semana</summary>
+
+    <div class="filtros-container">
+        <button id="btnFiltroTodos" class="btn-filtro activo" onclick="filtrarDia('todos')">🌐 Todos</button>
+        <button id="btnFiltroMartes" class="btn-filtro" onclick="filtrarDia('Martes')">📅 Martes</button>
+        <button id="btnFiltroJueves" class="btn-filtro" onclick="filtrarDia('Jueves')">📅 Jueves</button>
+    </div>
+    
+    <div class="container-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Socio</th>
+                    <th>Juego</th>
+                    <th>Plazas</th>
+                    <th>Hora</th>
+                    <th>Duración</th>
+                    <th>Mecánica</th>
+                    <th>Información</th>
+                    <th>Ubicación</th>
+                    <th>Participantes</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaJuegos"></tbody>
+        </table>
+    </div>
+
+    <div class="paginacion-container" id="controlesPaginacion" style="display:none;">
+        <button class="btn-paginacion" id="btnAnterior" onclick="cambiarPagina(-1)">◀ Anterior</button>
+        <span id="infoPaginacion">Página 1 de 1</span>
+        <button class="btn-paginacion" id="btnSiguiente" onclick="cambiarPagina(1)">Siguiente ▶</button>
+    </div>
+</details>
+
+<!-- Footer Informativo -->
+<div class="footer-informativo">
+    <p>💬 ¿Tienes algún problema, duda o sugerencia? Contacta con <b>Daniel Sánchez</b></p>
+</div>
+
+</main>
+
+<script>
+let juegos = [];
+let diaFiltroActual = 'todos';
+let idJuegoEditando = null;
+let paginaActual = 1;
+const registrosPorPagina = 10;
+
+window.addEventListener('DOMContentLoaded', () => {
+    const socioGuardado = localStorage.getItem('gmadrid_socio_actual');
+    if (socioGuardado) {
+        document.getElementById('nombre').value = socioGuardado;
+        mostrarFormulario();
+    }
+
+    const elementosFormulario = document.querySelectorAll('#nombre, #nombreJuego, #jugadores, #horaComienzo, #duracion, #mecanica, #informacion, #ubicacion, #juegoExistente, input[name="accion"], #cambiarGrupoExcepcional, #participarCreador');
+    elementosFormulario.forEach(el => {
+        el.addEventListener('input', ocultarMensaje);
+        el.addEventListener('change', ocultarMensaje);
+    });
+});
+
+function mostrarMensaje(texto, tipo = 'exito') {
+    const mensaje = document.getElementById("mensaje");
+    const textoMensaje = document.getElementById("textoMensaje");
+
+    if (!texto || texto.trim() === "") {
+        ocultarMensaje();
+        return;
+    }
+
+    textoMensaje.textContent = texto;
+    mensaje.style.display = "block";
+
+    if (tipo === 'exito') {
+        mensaje.style.background = "#dcfce7";
+        mensaje.style.color = "#16a34a";
+        document.querySelector('.btn-cerrar-mensaje').style.color = "#16a34a";
+    } else if (tipo === 'advertencia') {
+        mensaje.style.background = "#fef3c7";
+        mensaje.style.color = "#d97706";
+        document.querySelector('.btn-cerrar-mensaje').style.color = "#d97706";
+    } else {
+        mensaje.style.background = "#fee2e2";
+        mensaje.style.color = "#dc2626";
+        document.querySelector('.btn-cerrar-mensaje').style.color = "#dc2626";
+    }
+}
+
+function ocultarMensaje() {
+    const mensaje = document.getElementById("mensaje");
+    mensaje.style.display = "none";
+    document.getElementById("textoMensaje").textContent = "";
+}
+
+function obtenerDiaSocioReal(nombreSocio) {
+    const select = document.getElementById("nombre");
+    for (let option of select.options) {
+        if (option.text === nombreSocio || option.value === nombreSocio) {
+            const optgroup = option.parentElement;
+            if (optgroup && optgroup.id === "grupoMartes") return "Martes";
+            if (optgroup && optgroup.id === "grupoJueves") return "Jueves";
+        }
+    }
+    return nombreSocio.includes("Jueves") ? "Jueves" : "Martes";
+}
+
+function obtenerDiaJuego(juego) {
+    const diaNatural = obtenerDiaSocioReal(juego.socio);
+    if (juego.excepcional) {
+        return diaNatural === "Martes" ? "Jueves" : "Martes";
+    }
+    return diaNatural;
+}
+
+function obtenerRangoSemanaActual() {
+    const ahora = new Date();
+    const diaSemana = ahora.getDay();
+    const distanciaLunes = diaSemana === 0 ? -6 : 1 - diaSemana;
+    
+    const lunes = new Date(ahora);
+    lunes.setDate(ahora.getDate() + distanciaLunes);
+    lunes.setHours(0, 0, 0, 0);
+
+    const domingo = new Date(lunes);
+    domingo.setDate(lunes.getDate() + 6);
+    domingo.setHours(23, 59, 59, 999);
+
+    return { lunes, domingo };
+}
+
+function esDeEstaSemana(fechaStr) {
+    if (!fechaStr) return false;
+    const partes = fechaStr.split('/');
+    if (partes.length === 3) {
+        const fechaJuego = new Date(`${partes[2]}-${partes[1]}-${partes[0]}`);
+        const { lunes, domingo } = obtenerRangoSemanaActual();
+        return fechaJuego >= lunes && fechaJuego <= domingo;
+    }
+    return false;
+}
+
+function filtrarDia(dia) {
+    diaFiltroActual = dia;
+    paginaActual = 1; 
+    document.getElementById("btnFiltroTodos").classList.remove("activo");
+    document.getElementById("btnFiltroMartes").classList.remove("activo");
+    document.getElementById("btnFiltroJueves").classList.remove("activo");
+
+    if (dia === 'todos') document.getElementById("btnFiltroTodos").classList.add("activo");
+    if (dia === 'Martes') document.getElementById("btnFiltroMartes").classList.add("activo");
+    if (dia === 'Jueves') document.getElementById("btnFiltroJueves").classList.add("activo");
+
+    renderizarTabla();
+}
+
+function mostrarFormulario(){
+    const socio = document.getElementById("nombre").value;
+    const formJuego = document.getElementById("formJuego");
+    formJuego.style.display = socio ? "block" : "none";
+
+    if (socio) {
+        localStorage.setItem('gmadrid_socio_actual', socio);
+        const diaSocio = obtenerDiaSocioReal(socio);
+        const grupoContrario = diaSocio === "Martes" ? "Jueves" : "Martes";
+        document.getElementById("etiquetaCheckboxGrupo").textContent = `🔄 Proponer juego de mesa para los ${grupoContrario}`;
+    } else {
+        localStorage.removeItem('gmadrid_socio_actual');
+    }
+
+    cancelarEdicion();
+    renderizarTabla();
+    if (typeof window.cargarJuegos === 'function') {
+        window.cargarJuegos();
+    }
+}
+
+function cambiarPagina(direccion) {
+    paginaActual += direccion;
+    renderizarTabla();
+}
+
+function actualizarOpcionesJugadores(minPermitido = 2) {
+    const selectJugadores = document.getElementById("jugadores");
+    const valorActual = Number(selectJugadores.value);
+
+    selectJugadores.innerHTML = `<option value="">Selecciona el número máximo de jugadores</option>`;
+    for (let i = 2; i <= 15; i++) {
+        const disabledAttr = i < minPermitido ? "disabled" : "";
+        const labelExtra = i < minPermitido ? " (Menor que participantes actuales)" : "";
+        selectJugadores.innerHTML += `<option value="${i}" ${disabledAttr}>${i}${labelExtra}</option>`;
+    }
+
+    if (valorActual >= minPermitido) {
+        selectJugadores.value = valorActual;
+    } else {
+        selectJugadores.value = minPermitido;
+    }
+}
+
+function renderizarTabla(){
+    const tabla = document.getElementById("tablaJuegos");
+    tabla.innerHTML = "";
+    const socioActual = document.getElementById("nombre").value;
+
+    const juegosFiltrados = juegos.filter(juego => {
+        const perteneceSemana = esDeEstaSemana(juego.fechaRegistro);
+        if (!perteneceSemana) return false;
+
+        if (diaFiltroActual === 'todos') return true;
+        const diaJuego = obtenerDiaJuego(juego);
+        return diaJuego === diaFiltroActual;
+    });
+
+    juegosFiltrados.sort((a, b) => {
+        if (!socioActual) return (b.timestamp || 0) - (a.timestamp || 0);
+
+        const aEsCreador = a.socio === socioActual;
+        const bEsCreador = b.socio === socioActual;
+
+        const aParticipa = (a.participantes || []).includes(socioActual);
+        const bParticipa = (b.participantes || []).includes(socioActual);
+
+        if (aEsCreador && !bEsCreador) return -1;
+        if (!aEsCreador && bEsCreador) return 1;
+
+        const aEsSoloParticipante = aParticipa && !aEsCreador;
+        const bEsSoloParticipante = bParticipa && !bEsCreador;
+        if (aEsSoloParticipante && !bEsSoloParticipante) return -1;
+        if (!aEsSoloParticipante && bEsSoloParticipante) return 1;
+
+        return (b.timestamp || 0) - (a.timestamp || 0);
+    });
+
+    if (juegosFiltrados.length === 0) {
+        tabla.innerHTML = `<tr><td colspan="10" style="text-align: center; color: #888; padding: 20px;">No hay juegos registrados para este filtro.</td></tr>`;
+        document.getElementById("controlesPaginacion").style.display = "none";
+        return;
+    }
+
+    const totalPaginas = Math.ceil(juegosFiltrados.length / registrosPorPagina);
+    if (paginaActual > totalPaginas) paginaActual = totalPaginas;
+    if (paginaActual < 1) paginaActual = 1;
+
+    const inicio = (paginaActual - 1) * registrosPorPagina;
+    const fin = inicio + registrosPorPagina;
+    const juegosPagina = juegosFiltrados.slice(inicio, fin);
+
+    const contenedorPaginacion = document.getElementById("controlesPaginacion");
+    if (juegosFiltrados.length > registrosPorPagina) {
+        contenedorPaginacion.style.display = "flex";
+        document.getElementById("infoPaginacion").textContent = `Página ${paginaActual} de ${totalPaginas}`;
+        document.getElementById("btnAnterior").disabled = paginaActual === 1;
+        document.getElementById("btnSiguiente").disabled = paginaActual === totalPaginas;
+    } else {
+        contenedorPaginacion.style.display = "none";
+    }
+
+    juegosPagina.forEach(juego => {
+        const participantes = juego.participantes || [];
+        const estaApuntado = participantes.includes(socioActual);
+        const esCreador = (juego.socio === socioActual);
+        const estaCompleto = participantes.length >= Number(juego.jugadores);
+
+        let botonesAccionesHTML = "";
+
+        // El botón "Avisar" solo se muestra si el usuario está participando activamente (sea creador apuntado o participante)
+        if (socioActual && estaApuntado) {
+            botonesAccionesHTML += `<button class="btn-tabla btn-copiar" onclick="copiarListaParticipantes('${juego.id}')">Avisar</button>`;
+        }
+
+        if (socioActual) {
+            if (esCreador) {
+                if (estaApuntado) {
+                    botonesAccionesHTML += `<button class="btn-tabla btn-salir" onclick="salirDelJuego('${juego.id}')">Salirme</button>`;
+                } else if (!estaCompleto) {
+                    botonesAccionesHTML += `<button class="btn-tabla btn-unirse" onclick="unirseDirecto('${juego.id}')">Unirme</button>`;
+                }
+
+                botonesAccionesHTML += `
+                    <button class="btn-tabla btn-editar" onclick="prepararEdicion('${juego.id}')">Editar</button>
+                    <button class="btn-tabla btn-eliminar" onclick="eliminarJuego('${juego.id}')">Eliminar</button>
+                `;
+            } else if (estaApuntado) {
+                botonesAccionesHTML += `<button class="btn-tabla btn-salir" onclick="salirDelJuego('${juego.id}')">Salirme</button>`;
+            } else if (!estaCompleto) {
+                botonesAccionesHTML += `<button class="btn-tabla btn-unirse" onclick="unirseDirecto('${juego.id}')">Unirme</button>`;
+            } else {
+                botonesAccionesHTML += `<span style="color: gray; font-size: 12px; display:block; margin-top:4px; text-align:center;">Completo</span>`;
+            }
+        } else {
+            botonesAccionesHTML += `<span style="color: gray; font-size: 12px; display:block; margin-top:4px; text-align:center;">Identifícate</span>`;
+        }
+
+        const diaSocioFijo = obtenerDiaSocioReal(juego.socio);
+        const diaJuegoPropuesto = obtenerDiaJuego(juego);
+        const nombreSocioLimpio = (juego.socio || "").replace(/\s*\((Martes|Jueves)\)/gi, "").trim();
+        
+        let etiquetaSocioTexto = `(Socio de ${diaSocioFijo})`;
+        if (juego.excepcional) {
+            etiquetaSocioTexto = `(Socio de ${diaSocioFijo} ➔ Juego el ${diaJuegoPropuesto})`;
+        }
+
+        tabla.innerHTML += `
+        <tr>
+            <td>${nombreSocioLimpio} <span style="font-size:11px; color:#666; display:block; margin-top:2px;">${etiquetaSocioTexto}</span></td>
+            <td>${juego.nombreJuego || ""}</td>
+            <td>${participantes.length} / ${juego.jugadores || 0}</td>
+            <td>${juego.horaComienzo || "-"}</td>
+            <td>${juego.duracion ? juego.duracion + " min" : "-"}</td>
+            <td>${juego.mecanica || "-"}</td>
+            <td>${juego.informacion || "-"}</td>
+            <td>${juego.ubicacion || "-"}</td>
+            <td>${participantes.length > 0 ? participantes.join(", ") : "<span style='color:#999; font-style:italic;'>Sin participantes aún</span>"}</td>
+            <td>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: stretch;">
+                    ${botonesAccionesHTML}
+                </div>
+            </td>
+        </tr>
+        `;
+    });
+};
+
+window.copiarListaParticipantes = function(idDocumento) {
+    const juegoEncontrado = juegos.find(j => j.id === idDocumento);
+    if (!juegoEncontrado) return;
+
+    const participantes = juegoEncontrado.participantes || [];
+    const plazasMaximas = Number(juegoEncontrado.jugadores) || 0;
+    const plazasDisponibles = Math.max(0, plazasMaximas - participantes.length);
+
+    let textoACopiar = `¡Buenas!👋🏻😊\n¿Quieres apuntarte al juego de mesa "*${juegoEncontrado.nombreJuego}*"? 📝 ¡Todavía quedan *${plazasDisponibles} plazas* disponibles! 🎟️\n🔗 Entra para unirte al juego: https://gmadrid-juegos.example.com/partida`;
+    
+    textoACopiar += `\n\n🎲 Partida de *${juegoEncontrado.nombreJuego}*`;
+    textoACopiar += `\n👤 Propuesto por: ${juegoEncontrado.socio}`;
+    if (juegoEncontrado.horaComienzo) textoACopiar += `\n⏰ Hora de comienzo: ${juegoEncontrado.horaComienzo}`;
+    if (juegoEncontrado.duracion) textoACopiar += `\n⏱️ Duración: ${juegoEncontrado.duracion} min`;
+    if (juegoEncontrado.mecanica) textoACopiar += `\n⚙️ Mecánica: ${juegoEncontrado.mecanica}`;
+    if (juegoEncontrado.ubicacion) textoACopiar += `\n📍 Ubicación: ${juegoEncontrado.ubicacion}`;
+    if (juegoEncontrado.informacion) textoACopiar += `\nℹ️ Info: ${juegoEncontrado.informacion}`;
+    
+    textoACopiar += `\n\n👥 Participantes (${participantes.length}/${juegoEncontrado.jugadores}):\n` +
+        (participantes.length > 0 ? participantes.map((p, index) => `${index + 1}. ${p}`).join('\n') : "Ninguno todavía");
+
+    navigator.clipboard.writeText(textoACopiar).then(() => {
+        mostrarMensaje(`📋 ¡Información del juego "${juegoEncontrado.nombreJuego}" copiada al portapapeles!`, 'exito');
+    }).catch(err => {
+        console.error('Error al copiar: ', err);
+        mostrarMensaje(`❌ Error al intentar copiar la información.`, 'error');
+    });
+};
+
+function cambiarAccion(){
+    const accion = document.querySelector('input[name="accion"]:checked').value;
+    const bloqueNuevo = document.getElementById("bloqueNuevoJuego");
+    const bloqueUnirse = document.getElementById("bloqueUnirse");
+    const btnRegistrar = document.getElementById("btnRegistrar");
+
+    ocultarMensaje();
+
+    if (accion === "nuevo") {
+        bloqueNuevo.style.display = "block";
+        bloqueUnirse.style.display = "none";
+        btnRegistrar.textContent = "Registrar propuesta de juego de mesa";
+        if (!idJuegoEditando) {
+            actualizarOpcionesJugadores(2);
+            document.getElementById("participarCreador").checked = true;
+        }
+    } else {
+        bloqueNuevo.style.display = "none";
+        bloqueUnirse.style.display = "block";
+        btnRegistrar.textContent = "Unirme al juego de mesa";
+    }
+}
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    deleteDoc,
+    getDocs,
+    collection,
+    updateDoc,
+    arrayUnion,
+    arrayRemove
+} from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyA5vN0AbfISP-g-TrvX4Y34cZM8lejrYUM",
+    authDomain: "fichaje-gmadrid.firebaseapp.com",
+    projectId: "fichaje-gmadrid",
+    storageBucket: "fichaje-gmadrid.firebasestorage.app",
+    messagingSenderId: "794464212993",
+    appId: "1:794464212993:web:7cd442168aa97f63d9c800"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+function obtenerIdJuego(nombreJuego, socio){
+    const fecha = new Date().toISOString().split("T")[0];
+    return (nombreJuego + "_" + socio + "_" + fecha)
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/\s+/g,"_");
+}
+
+window.guardarJuego = async function(juego, idPersonalizado = null){
+    try{
+        const idDoc = idPersonalizado || obtenerIdJuego(juego.nombreJuego, juego.socio);
+        const documento = doc(db, "juegos", idDoc);
+        
+        if(idPersonalizado && idPersonalizado !== idDoc) {
+            await deleteDoc(doc(db, "juegos", idPersonalizado));
+        }
+
+        await setDoc(documento, juego);
+        return true;
+    } catch(error){
+        console.error(error);
+        return false;
+    }
+};
+
+window.cargarJuegos = async function(){
+    try{
+        const selectorJuego = document.getElementById("juegoExistente");
+        selectorJuego.innerHTML = `
+            <option value="">Selecciona un juego</option>
+            <optgroup label="Juegos para el Martes" id="selectGrupoMartes"></optgroup>
+            <optgroup label="Juegos para el Jueves" id="selectGrupoJueves"></optgroup>
+        `;
+
+        const grupoMartesHTML = document.getElementById("selectGrupoMartes");
+        const grupoJuevesHTML = document.getElementById("selectGrupoJueves");
+        const socioActual = document.getElementById("nombre").value;
+
+        const snapshot = await getDocs(collection(db, "juegos"));
+        juegos = [];
+
+        snapshot.forEach(doc => {
+            juegos.push({
+                id: doc.id,
+                ...doc.data()
+            });
+        });
+
+        juegos.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
+
+        juegos.forEach(juego => {
+            if (esDeEstaSemana(juego.fechaRegistro)) {
+                const participantes = juego.participantes || [];
+                const estaCompleto = participantes.length >= Number(juego.jugadores);
+                const yaParticipa = socioActual && participantes.includes(socioActual);
+                
+                let atributoDisabled = '';
+                let textoExtra = '';
+
+                if (yaParticipa) {
+                    atributoDisabled = 'disabled';
+                    textoExtra = ' ⚠️ [PARTICIPANDO]';
+                } else if (estaCompleto) {
+                    atributoDisabled = 'disabled';
+                    textoExtra = ' ❌ [COMPLETO]';
+                } else {
+                    textoExtra = ` ✅ EXITO: [${participantes.length}/${juego.jugadores} plazas]`;
+                }
+
+                const diaJuego = obtenerDiaJuego(juego);
+
+                const optionHTML = `
+                    <option value="${juego.id}" ${atributoDisabled}>
+                        ${juego.nombreJuego} (Propuesto por ${juego.socio})${textoExtra}
+                    </option>
+                `;
+
+                if (diaJuego === "Martes") {
+                    grupoMartesHTML.innerHTML += optionHTML;
+                } else {
+                    grupoJuevesHTML.innerHTML += optionHTML;
+                }
+            }
+        });
+
+        renderizarTabla();
+    } catch(error){
+        console.error(error);
+    }
+};
+
+window.registrarJuego = async function(){
+    const socio = document.getElementById("nombre").value;
+
+    if(!socio){
+        mostrarMensaje("❌ ERROR: Por favor, selecciona primero tu nombre de socio.", "error");
+        return;
+    }
+
+    const btnRegistrar = document.getElementById("btnRegistrar");
+    btnRegistrar.disabled = true;
+    btnRegistrar.textContent = "Guardando...";
+
+    const accion = document.querySelector('input[name="accion"]:checked').value;
+
+    if (accion === "unirse") {
+        const idJuego = document.getElementById("juegoExistente").value;
+        if (!idJuego) {
+            mostrarMensaje("❌ ERROR: Selecciona un juego existente para unirte.", "error");
+            btnRegistrar.disabled = false;
+            btnRegistrar.textContent = "Unirme al juego de mesa";
+            return;
+        }
+
+        try {
+            const refDoc = doc(db, "juegos", idJuego);
+            const snap = await getDoc(refDoc);
+            if (!snap.exists()) {
+                mostrarMensaje("❌ ERROR: El juego seleccionado ya no existe.", "error");
+                btnRegistrar.disabled = false;
+                btnRegistrar.textContent = "Unirme al juego de mesa";
+                return;
+            }
+
+            const datosJuego = snap.data();
+            const participantes = datosJuego.participantes || [];
+
+            if (participantes.includes(socio)) {
+                mostrarMensaje("⚠️ ADVERTENCIA: Ya estás apuntado a este juego.", "advertencia");
+                btnRegistrar.disabled = false;
+                btnRegistrar.textContent = "Unirme al juego de mesa";
+                return;
+            }
+
+            if (participantes.length >= Number(datosJuego.jugadores)) {
+                mostrarMensaje("❌ ERROR: Lo sentimos, este juego ya está completo.", "error");
+                btnRegistrar.disabled = false;
+                btnRegistrar.textContent = "Unirme al juego de mesa";
+                return;
+            }
+
+            await updateDoc(refDoc, {
+                participantes: arrayUnion(socio)
+            });
+
+            await cargarJuegos();
+            mostrarMensaje(`✅ EXITO: ¡Te has unido correctamente al juego "${datosJuego.nombreJuego}"!`, "exito");
+        } catch (error) {
+            console.error(error);
+            mostrarMensaje("❌ ERROR: No se pudo completar la unión a la partida.", "error");
+        } finally {
+            btnRegistrar.disabled = false;
+            btnRegistrar.textContent = "Unirme al juego de mesa";
+        }
+        return;
+    }
+
+    const nombreJuego = document.getElementById("nombreJuego").value.trim();
+    const jugadores = Number(document.getElementById("jugadores").value);
+    const horaComienzo = document.getElementById("horaComienzo").value;
+    const duracion = document.getElementById("duracion").value;
+    const mecanica = document.getElementById("mecanica").value.trim();
+    const informacion = document.getElementById("informacion").value.trim();
+    const ubicacion = document.getElementById("ubicacion").value.trim();
+    const excepcional = document.getElementById("cambiarGrupoExcepcional").checked;
+    const participaCreador = document.getElementById("participarCreador").checked;
+
+    if(!nombreJuego || !jugadores){
+        mostrarMensaje("❌ ERROR: Introduce el nombre del juego y el número máximo de jugadores.", "error");
+        btnRegistrar.disabled = false;
+        btnRegistrar.textContent = idJuegoEditando ? "Guardar cambios del juego de mesa propuesto" : "Registrar propuesta de juego de mesa";
+        return;
+    }
+
+    let participantesActuales = [];
+    let timestampOriginal = Date.now();
+
+    if (idJuegoEditando) {
+        const refDoc = doc(db, "juegos", idJuegoEditando);
+        const snap = await getDoc(refDoc);
+        if (snap.exists()) {
+            const datosAntiguos = snap.data();
+            participantesActuales = datosAntiguos.participantes || [];
+            timestampOriginal = datosAntiguos.timestamp || Date.now();
+
+            const estabaElCreador = participantesActuales.includes(socio);
+            if (participaCreador && !estabaElCreador) {
+                participantesActuales.push(socio);
+            } else if (!participaCreador && estabaElCreador) {
+                participantesActuales = participantesActuales.filter(p => p !== socio);
+            }
+
+            if (jugadores < participantesActuales.length) {
+                mostrarMensaje(`❌ ERROR: No puedes reducir las plazas a ${jugadores} porque hay ${participantesActuales.length} participantes apuntados actualmente.`, "error");
+                btnRegistrar.disabled = false;
+                btnRegistrar.textContent = "Guardar cambios del juego de mesa propuesto";
+                return;
+            }
+        }
+    } else {
+        participantesActuales = participaCreador ? [socio] : [];
+    }
+
+    const juegoObj = {
+        socio,
+        nombreJuego,
+        jugadores,
+        horaComienzo,
+        duracion,
+        mecanica,
+        informacion,
+        ubicacion,
+        excepcional,
+        participantes: participantesActuales,
+        fechaRegistro: new Date().toLocaleDateString("es-ES"),
+        timestamp: timestampOriginal
+    };
+
+    const guardado = await guardarJuego(juegoObj, idJuegoEditando);
+
+    if (guardado) {
+        const mensajeExito = idJuegoEditando ? "✅ Propuesta de juego actualizada correctamente." : "✅ Propuesta de juego registrada con éxito.";
+        cancelarEdicion();
+        await cargarJuegos();
+        mostrarMensaje(mensajeExito, "exito");
+    } else {
+        mostrarMensaje("❌ ERROR: No se pudo guardar la propuesta en la base de datos.", "error");
+        btnRegistrar.disabled = false;
+        btnRegistrar.textContent = idJuegoEditando ? "Guardar cambios del juego de mesa propuesto" : "Registrar propuesta de juego de mesa";
+    }
+};
+
+window.unirseDirecto = async function(idJuego){
+    const socio = document.getElementById("nombre").value;
+    if(!socio){
+        mostrarMensaje("❌ ERROR: Identifícate con tu nombre arriba para unirte a un juego.", "error");
+        return;
+    }
+
+    try {
+        const refDoc = doc(db, "juegos", idJuego);
+        const snap = await getDoc(refDoc);
+        if(!snap.exists()) return;
+
+        const datos = snap.data();
+        const participantes = datos.participantes || [];
+
+        if(participantes.includes(socio)){
+            mostrarMensaje("⚠️ ADVERTENCIA: Ya estás apuntado a este juego.", "advertencia");
+            return;
+        }
+
+        if(participantes.length >= Number(datos.jugadores)){
+            mostrarMensaje("❌ ERROR: Este juego ya está completo.", "error");
+            return;
+        }
+
+        await updateDoc(refDoc, {
+            participantes: arrayUnion(socio)
+        });
+
+        await cargarJuegos();
+        mostrarMensaje(`✅ EXITO: Te has unido a "${datos.nombreJuego}" correctamente.`, "exito");
+    } catch(error) {
+        console.error(error);
+        mostrarMensaje("❌ ERROR al unirse al juego.", "error");
+    }
+};
+
+window.salirDelJuego = async function(idJuego){
+    const socio = document.getElementById("nombre").value;
+    if(!socio) return;
+
+    try {
+        const refDoc = doc(db, "juegos", idJuego);
+        const snap = await getDoc(refDoc);
+        if(!snap.exists()) return;
+
+        const datos = snap.data();
+
+        await updateDoc(refDoc, {
+            participantes: arrayRemove(socio)
+        });
+
+        await cargarJuegos();
+        mostrarMensaje(`⚠️ ADVERTENCIA: Has salido de la partida "${datos.nombreJuego}".`, "advertencia");
+    } catch(error) {
+        console.error(error);
+        mostrarMensaje("❌ ERROR al salir del juego.", "error");
+    }
+};
+
+window.eliminarJuego = async function(idJuego){
+    const socio = document.getElementById("nombre").value;
+    const juegoEncontrado = juegos.find(j => j.id === idJuego);
+
+    if(!juegoEncontrado || juegoEncontrado.socio !== socio) {
+        mostrarMensaje("❌ ERROR: Solo el creador de la propuesta puede eliminarla.", "error");
+        return;
+    }
+
+    if(confirm(`¿Estás seguro de que deseas eliminar la propuesta de "${juegoEncontrado.nombreJuego}"?`)){
+        try {
+            await deleteDoc(doc(db, "juegos", idJuego));
+            cancelarEdicion();
+            await cargarJuegos();
+            mostrarMensaje("✅ Propuesta de juego eliminada correctamente.", "advertencia");
+        } catch(error) {
+            console.error(error);
+            mostrarMensaje("❌ ERROR al eliminar el juego.", "error");
+        }
+    }
+};
+
+window.prepararEdicion = function(idJuego){
+    const juego = juegos.find(j => j.id === idJuego);
+    const socio = document.getElementById("nombre").value;
+
+    if(!juego || juego.socio !== socio){
+        mostrarMensaje("❌ ERROR: No tienes permisos para editar esta propuesta.", "error");
+        return;
+    }
+
+    idJuegoEditando = idJuego;
+
+    document.querySelector('input[name="accion"][value="nuevo"]').checked = true;
+    cambiarAccion();
+    document.getElementById("contenedorAccionesRadio").style.display = "none";
+
+    document.getElementById("nombreJuego").value = juego.nombreJuego || "";
+    
+    const participantesActuales = juego.participantes || [];
+    const participaElCreador = participantesActuales.includes(socio);
+    document.getElementById("participarCreador").checked = participaElCreador;
+
+    actualizarOpcionesJugadores(Math.max(2, participantesActuales.length));
+    document.getElementById("jugadores").value = juego.jugadores || "";
+
+    document.getElementById("horaComienzo").value = juego.horaComienzo || "";
+    document.getElementById("duracion").value = juego.duracion || "";
+    document.getElementById("mecanica").value = juego.mecanica || "";
+    document.getElementById("informacion").value = juego.informacion || "";
+    document.getElementById("ubicacion").value = juego.ubicacion || "";
+    document.getElementById("cambiarGrupoExcepcional").checked = juego.excepcional || false;
+
+    document.getElementById("btnRegistrar").textContent = "Guardar cambios del juego de mesa propuesto";
+    document.getElementById("btnCancelarEdicion").style.display = "block";
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    mostrarMensaje("⚠️ ADVERTENCIA: Editando propuesta de juego de mesa", "advertencia");
+};
+
+window.cancelarEdicion = function(){
+    idJuegoEditando = null;
+    document.getElementById("contenedorAccionesRadio").style.display = "block";
+    document.querySelector('input[name="accion"][value="nuevo"]').checked = true;
+    cambiarAccion();
+
+    document.getElementById("nombreJuego").value = "";
+    document.getElementById("participarCreador").checked = true;
+    actualizarOpcionesJugadores(2);
+    document.getElementById("jugadores").value = "";
+    document.getElementById("horaComienzo").value = "";
+    document.getElementById("duracion").value = "";
+    document.getElementById("mecanica").value = "";
+    document.getElementById("informacion").value = "";
+    document.getElementById("ubicacion").value = "";
+    document.getElementById("cambiarGrupoExcepcional").checked = false;
+
+    const btnReg = document.getElementById("btnRegistrar");
+    btnReg.disabled = false;
+    btnReg.textContent = "Registrar propuesta de juego de mesa";
+    document.getElementById("btnCancelarEdicion").style.display = "none";
+};
+
+cargarJuegos();
+</script>
+
+</body>
+</html>
