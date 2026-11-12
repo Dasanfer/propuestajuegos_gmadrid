@@ -133,7 +133,6 @@ details.container[open] {
     font-weight: 600;
     font-size: 14px;
     margin-top: 16px;
-    margin-bottom: 6px;
     color: #444;
 }
 
@@ -254,7 +253,7 @@ button:disabled {
 .filtros-container {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     margin-top: 20px;
 }
 
@@ -279,6 +278,38 @@ button:disabled {
     background: #0078d4;
     color: white;
     border-color: #0078d4;
+}
+
+/* Filtros secundarios "Mostrar solo" */
+.filtros-secundarios {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    background: #f8fafc;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filtro-check-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    margin-top: 0 !important;
+}
+
+.filtro-check-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #0078d4;
+    cursor: pointer;
+    margin: 0;
 }
 
 table{
@@ -613,6 +644,17 @@ select option:disabled {
         <button id="btnFiltroMartes" class="btn-filtro" onclick="filtrarDia('Martes')">📅 Martes</button>
         <button id="btnFiltroJueves" class="btn-filtro" onclick="filtrarDia('Jueves')">📅 Jueves</button>
     </div>
+
+    <!-- Nuevo filtro "Mostrar solo" -->
+    <div class="filtros-secundarios">
+        <span style="font-size: 13px; font-weight: bold; color: #334155;">🔍 Mostrar solo juegos de mesa:</span>
+        <label class="filtro-check-label">
+            <input type="checkbox" id="filtroParticipo" onchange="renderizarTabla()"> participo
+        </label>
+        <label class="filtro-check-label">
+            <input type="checkbox" id="filtroCreador" onchange="renderizarTabla()"> creador
+        </label>
+    </div>
     
     <div class="container-table">
         <table>
@@ -811,14 +853,26 @@ function renderizarTabla(){
     const tabla = document.getElementById("tablaJuegos");
     tabla.innerHTML = "";
     const socioActual = document.getElementById("nombre").value;
+    const soloParticipo = document.getElementById("filtroParticipo").checked;
+    const soloCreador = document.getElementById("filtroCreador").checked;
 
     const juegosFiltrados = juegos.filter(juego => {
         const perteneceSemana = esDeEstaSemana(juego.fechaRegistro);
         if (!perteneceSemana) return false;
 
-        if (diaFiltroActual === 'todos') return true;
-        const diaJuego = obtenerDiaJuego(juego);
-        return diaJuego === diaFiltroActual;
+        if (diaFiltroActual !== 'todos') {
+            const diaJuego = obtenerDiaJuego(juego);
+            if (diaJuego !== diaFiltroActual) return false;
+        }
+
+        const participantes = juego.participantes || [];
+        const esParticipante = socioActual && participantes.includes(socioActual);
+        const esCreador = socioActual && (juego.socio === socioActual);
+
+        if (soloParticipo && !esParticipante) return false;
+        if (soloCreador && !esCreador) return false;
+
+        return true;
     });
 
     juegosFiltrados.sort((a, b) => {
@@ -873,8 +927,8 @@ function renderizarTabla(){
 
         let botonesAccionesHTML = "";
 
-        // El botón "Avisar" solo se muestra si el usuario está participando activamente (sea creador apuntado o participante)
-        if (socioActual && estaApuntado) {
+        // El botón "Avisar" solo se muestra si el usuario está participando activamente Y el juego NO está completo
+        if (socioActual && estaApuntado && !estaCompleto) {
             botonesAccionesHTML += `<button class="btn-tabla btn-copiar" onclick="copiarListaParticipantes('${juego.id}')">Avisar</button>`;
         }
 
