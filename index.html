@@ -45,6 +45,45 @@ html, body {
     overflow-x: hidden;
 }
 
+/* SPINNER DE CARGA GLOBAL */
+#overlayCarga {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 9999999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.spinner-arcoiris {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(117, 0, 135, 0.15);
+    border-top: 5px solid #750087;
+    border-radius: 50%;
+    animation: girarSpinner 1s linear infinite;
+}
+
+@keyframes girarSpinner {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.texto-spinner {
+    font-size: 15px;
+    font-weight: 700;
+    color: #580065;
+    letter-spacing: -0.3px;
+}
+
 /* CONTENEDOR DE ELEMENTOS FLOTANTES (EMOTES LANZADOS) */
 #floating-games-container {
     position: fixed;
@@ -248,7 +287,9 @@ header, main, footer {
 
 /* TARJETAS DE ALERTA PERSONALIZADAS */
 .alerta-inscripciones-card {
-    background: rgba(248, 250, 252, 0.95);
+    background: rgba(248, 250, 252, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-left: 6px solid #16a34a;
     border-top: 1px solid #e2e8f0;
     border-right: 1px solid #e2e8f0;
@@ -268,7 +309,9 @@ header, main, footer {
 
 .alerta-actualizaciones-card {
     position: relative;
-    background: rgba(248, 250, 252, 0.95);
+    background: rgba(248, 250, 252, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-top: 1px solid #e2e8f0;
     border-right: 1px solid #e2e8f0;
     border-bottom: 1px solid #e2e8f0;
@@ -283,20 +326,24 @@ header, main, footer {
 
 .alerta-actualizaciones-card.borde-azul {
     border-left: 6px solid #0284c7;
+    background: rgba(240, 249, 255, 0.85);
 }
 
 .alerta-actualizaciones-card.borde-rojo {
     border-left: 6px solid #dc2626;
+    background: rgba(254, 242, 242, 0.85);
 }
 
 .alerta-actualizaciones-card.borde-violeta {
     border-left: 6px solid #750087;
-    background: rgba(250, 245, 255, 0.95);
+    background: rgba(250, 245, 255, 0.85);
 }
 
 .alerta-actualizaciones-card.borde-amarillo {
     border-left: 6px solid #f59e0b;
-    background: rgba(254, 243, 199, 0.95);
+    background: rgba(254, 243, 199, 0.45);
+    border-color: rgba(253, 230, 138, 0.6);
+    border-left-color: #f59e0b;
 }
 
 .btn-cerrar-alerta-actualizacion {
@@ -374,7 +421,6 @@ input[type="text"], input[type="time"], input[type="number"], textarea {
     animation: brilloInputArcoiris 6s linear infinite;
 }
 
-/* LISTA DE SUGERENCIAS FLOTANTE GLOBAL */
 #listaSugerenciasGlobal {
     display: none;
     position: fixed;
@@ -449,6 +495,8 @@ input[type="text"], input[type="time"], input[type="number"], textarea {
     width: auto;
     margin: 0;
     z-index: 2;
+    animation: none;
+    box-shadow: none;
 }
 
 .btn-toggle-pin:hover {
@@ -574,7 +622,6 @@ button {
     transition: transform 0.15s ease, filter 0.2s ease;
 }
 
-
 button:active:not(:disabled) {
     transform: scale(0.97);
 }
@@ -638,7 +685,6 @@ button:disabled {
 #mensaje.alerta-advertencia .btn-cerrar-mensaje:hover { background: rgba(217, 119, 6, 0.18); color: #78350f; }
 #mensaje.alerta-info .btn-cerrar-mensaje:hover { background: rgba(3, 105, 161, 0.18); color: #0c4a6e; }
 
-/* FILTROS / BOTONES TIPO ASISTENCIA */
 .filtros-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -774,9 +820,8 @@ th {
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: #faf5ff; }
 
-/* ESTILOS DE DESTACADO PARA TUS JUEGOS IMPORTANTES */
 tr.fila-importante td {
-    background-color: #f7effd !important; /* Morado muy clarito */
+    background-color: #f7effd !important;
 }
 tr.fila-importante:hover td {
     background-color: #f0e2fa !important;
@@ -923,40 +968,6 @@ tr.fila-importante:hover td {
 .dropdown-item:hover { background: rgba(117, 0, 135, 0.08); color: #750087; transform: none; filter: none; }
 .dropdown-item.peligro:hover { background: #fef2f2; color: #dc2626; }
 
-#bloqueSaludo {
-    display: none;
-    text-align: center;
-    margin-bottom: 16px;
-}
-
-.texto-saludo-principal {
-    font-size: 18px;
-    font-weight: 700;
-    color: #334155;
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.enlace-cambiar-socio {
-    font-size: 13px;
-    color: #750087;
-    text-decoration: none;
-    font-weight: 600;
-}
-.enlace-cambiar-socio:hover { text-decoration: underline; }
-
-.ayuda-pin {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 6px;
-    margin-bottom: 14px;
-    line-height: 1.4;
-}
-
 .btn-cancelar-edicion {
     background: #ffffff;
     margin-top: 10px;
@@ -1017,6 +1028,12 @@ details.container[open] summary::before { content: "▼ "; }
 </head>
 <body>
 
+<!-- OVERLAY SPINNER DE CARGA GLOBAL -->
+<div id="overlayCarga">
+    <div class="spinner-arcoiris"></div>
+    <div class="texto-spinner" id="textoSpinnerCarga">Comprobando actualizaciones y cargando datos...</div>
+</div>
+
 <!-- Emotes lanzados al fondo -->
 <div id="floating-games-container"></div>
 <div class="esquina-opuesta-bg"></div>
@@ -1036,7 +1053,7 @@ details.container[open] summary::before { content: "▼ "; }
 
 <header>
     <div class="header-principal">
-        <div class="hub-avatar">🎲</div>
+        <div class="hub-avatar">♟️</div>
         <h1>Propuestas de Juegos de Mesa</h1>
         <h2>GMadrid Juegos de Mesa 🏳️‍🌈</h2>
     </div>
@@ -1049,12 +1066,16 @@ details.container[open] summary::before { content: "▼ "; }
         <div>
             <a href="#" onclick="cambiarSocio(event)" class="enlace-cambiar-socio">¿No eres tú? Cambiar de socio</a>
         </div>
-        <!-- Alerta de juegos activos -->
+        <!-- Alerta de juegos activos / sin inscripciones -->
         <div id="alertaInscripcionesActivas" class="alerta-inscripciones-card" style="display:none;"></div>
-        <!-- Contenedor para múltiples alertas de actualizaciones/altas en color amarillo anaranjado -->
+        <!-- Contenedor para múltiples alertas de altas y bajas de participantes (amarillo transparente) -->
         <div id="contenedorAlertasAltas" style="display:flex; flex-direction:column; gap:8px; margin-top:10px;"></div>
-        <!-- Alerta principal de actualizaciones -->
-        <div id="alertaActualizacionesNuevas" class="alerta-actualizaciones-card" style="display:none;"></div>
+        <!-- Alerta azul independiente para juegos nuevos propuestos -->
+        <div id="alertaNuevosJuegos" class="alerta-actualizaciones-card borde-azul" style="display:none;"></div>
+        <!-- Alerta violeta/morada independiente para juegos que se han completado de jugadores -->
+        <div id="alertaJuegosCompletos" class="alerta-actualizaciones-card borde-violeta" style="display:none;"></div>
+        <!-- Alerta roja independiente para juegos eliminados -->
+        <div id="alertaJuegosEliminados" class="alerta-actualizaciones-card borde-rojo" style="display:none;"></div>
     </div>
 
     <div id="bloqueSelector">
@@ -1093,7 +1114,7 @@ details.container[open] summary::before { content: "▼ "; }
 
         <div id="bloqueNuevoJuego" style="margin-top: 14px;">
             <label><b>Nombre del juego *</b></label>
-            <input type="text" id="nombreJuego" placeholder="Ej: Ark Nova">
+            <input type="text" id="nombreJuego" placeholder="Ej: Rebel Princess">
 
             <label><b>Número de jugadores *</b></label>
             <select id="jugadores">
@@ -1207,17 +1228,27 @@ const registrosPorPagina = 10;
 let procesandoOperacion = false;
 let listaCompletaSocios = [];
 
-window.addEventListener('DOMContentLoaded', () => {
+function mostrarSpinner(texto = "Comprobando actualizaciones y cargando datos...") {
+    document.getElementById("textoSpinnerCarga").textContent = texto;
+    document.getElementById("overlayCarga").style.display = "flex";
+}
+
+function ocultarSpinner() {
+    document.getElementById("overlayCarga").style.display = "none";
+}
+
+window.addEventListener('DOMContentLoaded', async () => {
+    mostrarSpinner("Conectando con la comunidad GMadrid...");
     actualizarRelojCabecera();
     setInterval(actualizarRelojCabecera, 1000);
     inicializarListaSocios();
     
-    // Al cargar sin socio seleccionado, establecer filtro 'todos' por defecto
     filtrarDia('todos');
 
     if (typeof verificarEstadoInicial === 'function') {
-        verificarEstadoInicial();
+        await verificarEstadoInicial();
     }
+    ocultarSpinner();
 
     window.addEventListener('click', (e) => {
         if (!e.target.closest('.btn-tres-puntos') && !e.target.closest('#dropdownGlobal')) {
@@ -1295,30 +1326,28 @@ function actualizarRelojCabecera() {
 
 function obtenerRangoFechasFiltro(filtroDia) {
     const ahora = new Date();
-    const diaSemanaActual = ahora.getDay(); // 0: Dom, 1: Lun, 2: Mar, 3: Mié, 4: Jue, 5: Vie, 6: Sáb
+    const diaSemanaActual = ahora.getDay();
     const inicio = new Date(ahora);
     inicio.setHours(0, 0, 0, 0);
 
     let tipoGrupo = filtroDia;
     if (filtroDia === 'todos') {
-        const socioActual = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+        const socioActual = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
         tipoGrupo = socioActual ? obtenerDiaSocioReal(socioActual) : 'Martes';
     }
 
     if (tipoGrupo === 'Martes') {
-        // Ciclo Martes: Del Miércoles anterior al Martes actual
         let diferencia = diaSemanaActual - 3;
         if (diferencia < 0) diferencia += 7;
         inicio.setDate(ahora.getDate() - diferencia);
     } else {
-        // Ciclo Jueves: Del Viernes anterior al Jueves actual
         let diferencia = diaSemanaActual - 5;
         if (diferencia < 0) diferencia += 7;
         inicio.setDate(ahora.getDate() - diferencia);
     }
 
     const fin = new Date(inicio);
-    fin.setDate(inicio.getDate() + 6); // 7 días exactos
+    fin.setDate(inicio.getDate() + 6);
     fin.setHours(23, 59, 59, 999);
 
     return { inicio, fin };
@@ -1483,7 +1512,7 @@ window.toggleDropdown = function(id, event) {
     const juego = juegos.find(j => j.id === id);
     if (!juego) return;
 
-    const socioActual = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+    const socioActual = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
     const participantes = juego.participantes || [];
     const estaApuntado = participantes.includes(socioActual);
     const esCreador = (juego.socio === socioActual);
@@ -1493,23 +1522,23 @@ window.toggleDropdown = function(id, event) {
 
     if (socioActual) {
         if (estaApuntado && !estaCompleto) {
-            opcionesDropdownHTML += `<button class="dropdown-item" onclick="copiarListaParticipantes('${juego.id}')">📋 Avisar / Compartir</button>`;
+            opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); copiarListaParticipantes('${juego.id}')">📋 Avisar / Compartir</button>`;
         }
 
         if (esCreador) {
             if (estaApuntado) {
-                opcionesDropdownHTML += `<button class="dropdown-item" onclick="salirDelJuego('${juego.id}')">🚪 Salirme</button>`;
+                opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); salirDelJuego('${juego.id}')">🚪 Salirme</button>`;
             } else if (!estaCompleto) {
-                opcionesDropdownHTML += `<button class="dropdown-item" onclick="unirseDirecto('${juego.id}')">⚔️ Unirme</button>`;
+                opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); unirseDirecto('${juego.id}')">⚔️ Unirme</button>`;
             }
             opcionesDropdownHTML += `
-                <button class="dropdown-item" onclick="prepararEdicion('${juego.id}')">✏️ Editar</button>
-                <button class="dropdown-item peligro" onclick="eliminarJuego('${juego.id}')">🗑️ Eliminar</button>
+                <button class="dropdown-item" onclick="cerrarDropdownGlobal(); prepararEdicion('${juego.id}')">✏️ Editar</button>
+                <button class="dropdown-item peligro" onclick="cerrarDropdownGlobal(); eliminarJuego('${juego.id}')">🗑️ Eliminar</button>
             `;
         } else if (estaApuntado) {
-            opcionesDropdownHTML += `<button class="dropdown-item" onclick="salirDelJuego('${juego.id}')">🚪 Salirme</button>`;
+            opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); salirDelJuego('${juego.id}')">🚪 Salirme</button>`;
         } else if (!estaCompleto) {
-            opcionesDropdownHTML += `<button class="dropdown-item" onclick="unirseDirecto('${juego.id}')">⚔️ Unirme</button>`;
+            opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); unirseDirecto('${juego.id}')">⚔️ Unirme</button>`;
         }
     }
 
@@ -1529,6 +1558,10 @@ window.toggleDropdown = function(id, event) {
 
     dropdown.style.left = left + 'px';
     dropdown.style.top = top + 'px';
+}
+
+function cerrarDropdownGlobal() {
+    document.getElementById('dropdownGlobal').classList.remove('mostrar');
 }
 
 function mostrarMensaje(texto, tipo = 'exito') {
@@ -1582,7 +1615,7 @@ function ocultarMensaje() {
 
 function obtenerIdUnicoDispositivo() {
     let deviceId = localStorage.getItem("gmadrid_device_uuid");
-    if (!deviceId) {
+    if (!deviceId || deviceId.startsWith('dev_') === false) {
         deviceId = 'dev_' + Math.random().toString(36).substring(2, 15) + Date.now().toString(36);
         localStorage.setItem("gmadrid_device_uuid", deviceId);
     }
@@ -1665,6 +1698,7 @@ function actualizarOpcionesJugadores(minPermitido = 2) {
 window.cambiarSocio = function(event) {
     event.preventDefault();
     localStorage.removeItem('gmadrid_socio_actual');
+    localStorage.removeItem('gmadrid_device_uuid');
     location.reload();
 }
 
@@ -1685,7 +1719,7 @@ function renderizarTabla(){
     if (!tabla) return;
     tabla.innerHTML = "";
     
-    const socioActual = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+    const socioActual = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
     const soloParticipo = document.getElementById("filtroParticipo").checked;
     const soloCreador = document.getElementById("filtroCreador").checked;
 
@@ -1739,6 +1773,7 @@ function renderizarTabla(){
     if (juegosFiltrados.length === 0) {
         tabla.innerHTML = `<tr><td colspan="10" style="text-align: center; color: #888; padding: 20px;">No hay juegos registrados para este filtro.</td></tr>`;
         document.getElementById("controlesPaginacion").style.display = "none";
+        actualizarAlertaInscripciones(socioActual);
         return;
     }
 
@@ -1770,23 +1805,23 @@ function renderizarTabla(){
 
         if (socioActual) {
             if (estaApuntado && !estaCompleto) {
-                opcionesDropdownHTML += `<button class="dropdown-item" onclick="copiarListaParticipantes('${juego.id}')">📋 Avisar / Compartir</button>`;
+                opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); copiarListaParticipantes('${juego.id}')">📋 Avisar / Compartir</button>`;
             }
 
             if (esCreador) {
                 if (estaApuntado) {
-                    opcionesDropdownHTML += `<button class="dropdown-item" onclick="salirDelJuego('${juego.id}')">🚪 Salirme</button>`;
+                    opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); salirDelJuego('${juego.id}')">🚪 Salirme</button>`;
                 } else if (!estaCompleto) {
-                    opcionesDropdownHTML += `<button class="dropdown-item" onclick="unirseDirecto('${juego.id}')">⚔️ Unirme</button>`;
+                    opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); unirseDirecto('${juego.id}')">⚔️ Unirme</button>`;
                 }
                 opcionesDropdownHTML += `
-                    <button class="dropdown-item" onclick="prepararEdicion('${juego.id}')">✏️ Editar</button>
-                    <button class="dropdown-item peligro" onclick="eliminarJuego('${juego.id}')">🗑️ Eliminar</button>
+                    <button class="dropdown-item" onclick="cerrarDropdownGlobal(); prepararEdicion('${juego.id}')">✏️ Editar</button>
+                    <button class="dropdown-item peligro" onclick="cerrarDropdownGlobal(); eliminarJuego('${juego.id}')">🗑️ Eliminar</button>
                 `;
             } else if (estaApuntado) {
-                opcionesDropdownHTML += `<button class="dropdown-item" onclick="salirDelJuego('${juego.id}')">🚪 Salirme</button>`;
+                opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); salirDelJuego('${juego.id}')">🚪 Salirme</button>`;
             } else if (!estaCompleto) {
-                opcionesDropdownHTML += `<button class="dropdown-item" onclick="unirseDirecto('${juego.id}')">⚔️ Unirme</button>`;
+                opcionesDropdownHTML += `<button class="dropdown-item" onclick="cerrarDropdownGlobal(); unirseDirecto('${juego.id}')">⚔️ Unirme</button>`;
             }
         }
 
@@ -1938,7 +1973,8 @@ import {
     collection,
     updateDoc,
     arrayUnion,
-    arrayRemove
+    arrayRemove,
+    writeBatch
 } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -1961,14 +1997,58 @@ async function generarHashPin(pin) {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+async function inicializarArchivoUltimasConexionesTodosSocios() {
+    try {
+        const snapshotConexiones = await getDocs(collection(db, "ultimas_conexiones_juegos"));
+        const idsExistentes = new Set();
+        snapshotConexiones.forEach(d => idsExistentes.add(d.id));
+
+        const sociosFaltantes = listaCompletaSocios.filter(s => !idsExistentes.has(sanitizarId(s.nombre)));
+        if (sociosFaltantes.length === 0) return;
+
+        let participantesMapActual = {};
+        juegos.forEach(j => {
+            participantesMapActual[j.id] = j.participantes || [];
+        });
+
+        const ahoraTimestamp = Date.now();
+        const batch = writeBatch(db);
+
+        sociosFaltantes.forEach(s => {
+            const idDoc = sanitizarId(s.nombre);
+            const juegosInscritosIds = juegos
+                .filter(j => ((j.participantes || []).includes(s.nombre) || j.socio === s.nombre) && esDeEstaSemana(j.fechaRegistro, s.nombre))
+                .map(j => j.id);
+
+            const refDoc = doc(db, "ultimas_conexiones_juegos", idDoc);
+            batch.set(refDoc, {
+                nombre: s.nombre,
+                grupo: s.grupo,
+                timestamp: ahoraTimestamp,
+                juegosInscritosIds: juegosInscritosIds,
+                participantesMap: participantesMapActual,
+                juegosEliminados: []
+            });
+        });
+
+        await batch.commit();
+    } catch (error) {
+        console.warn("Error inicializando ultimas_conexiones_juegos para todos los socios:", error);
+    }
+}
+
 window.verificarEstadoInicial = async function() {
-    const socioGuardado = localStorage.getItem('gmadrid_socio_actual');
-    if (!socioGuardado) {
+    const socioGuardado = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid');
+    
+    if (!socioGuardado || socioGuardado.startsWith('dev_')) {
+        localStorage.removeItem('gmadrid_device_uuid');
+        localStorage.removeItem('gmadrid_socio_actual');
         document.getElementById('bloqueSelector').style.display = 'block';
         document.getElementById('bloqueSaludo').style.display = 'none';
         document.getElementById('formJuego').style.display = 'none';
         document.getElementById('acordeonListado').style.display = 'none';
         await cargarJuegos();
+        await inicializarArchivoUltimasConexionesTodosSocios();
         return;
     }
 
@@ -1981,7 +2061,6 @@ window.verificarEstadoInicial = async function() {
         document.getElementById('buscadorSocio').value = socioGuardado;
         document.getElementById('nombre').value = socioGuardado;
 
-        // Establecer filtro por defecto según el grupo del socio al iniciar
         const diaSocio = obtenerDiaSocioReal(socioGuardado);
         filtrarDia(diaSocio);
 
@@ -1993,6 +2072,7 @@ window.verificarEstadoInicial = async function() {
             document.getElementById('formJuego').style.display = 'block';
             document.getElementById('acordeonListado').style.display = 'block';
             await cargarJuegos();
+            await inicializarArchivoUltimasConexionesTodosSocios();
             await comprobarActualizacionesYGuardar(socioGuardado);
         } else {
             document.getElementById('bloqueSelector').style.display = 'none';
@@ -2008,6 +2088,8 @@ window.verificarEstadoInicial = async function() {
                 document.getElementById("ayudaPinCreacion").style.display = "block";
             }
             await cargarJuegos();
+            await inicializarArchivoUltimasConexionesTodosSocios();
+            actualizarAlertaInscripciones(socioGuardado);
         }
     } catch (error) {
         console.error("Verificación inicial:", error);
@@ -2020,10 +2102,12 @@ window.gestionarSocio = async function() {
     ocultarMensaje();
     const nombre = document.getElementById("nombre").value;
     if (nombre) {
+        mostrarSpinner("Validando socio y cargando novedades...");
         localStorage.setItem('gmadrid_socio_actual', nombre);
         const diaSocio = obtenerDiaSocioReal(nombre);
         filtrarDia(diaSocio);
-        await verificarDispositivoYCredencial(nombre);
+        await verificarDispositivoYFichaje(nombre);
+        ocultarSpinner();
     } else {
         localStorage.removeItem('gmadrid_socio_actual');
         document.getElementById("bloquePin").style.display = "none";
@@ -2032,7 +2116,7 @@ window.gestionarSocio = async function() {
     }
 }
 
-window.verificarDispositivoYCredencial = async function(nombreSocio) {
+window.verificarDispositivoYFichaje = async function(nombreSocio) {
     try {
         const idDoc = sanitizarId(nombreSocio);
         const refCredencial = doc(db, "credenciales_socios", idDoc);
@@ -2052,6 +2136,7 @@ window.verificarDispositivoYCredencial = async function(nombreSocio) {
                 document.getElementById("formJuego").style.display = "block";
                 document.getElementById("acordeonListado").style.display = "block";
                 await cargarJuegos();
+                await inicializarArchivoUltimasConexionesTodosSocios();
                 await comprobarActualizacionesYGuardar(nombreSocio);
             } else {
                 document.getElementById("bloquePin").style.display = "block";
@@ -2091,6 +2176,7 @@ window.validarOConfigurarPin = async function() {
     }
 
     procesandoOperacion = true;
+    mostrarSpinner("Verificando PIN...");
     try {
         const idDoc = sanitizarId(nombreSocio);
         const refCredencial = doc(db, "credenciales_socios", idDoc);
@@ -2112,11 +2198,14 @@ window.validarOConfigurarPin = async function() {
                 document.getElementById("formJuego").style.display = "block";
                 document.getElementById("acordeonListado").style.display = "block";
                 await cargarJuegos();
+                await inicializarArchivoUltimasConexionesTodosSocios();
                 await comprobarActualizacionesYGuardar(nombreSocio);
                 procesandoOperacion = false;
+                ocultarSpinner();
                 mostrarMensaje("PIN verificado correctamente.", "exito");
             } else {
                 procesandoOperacion = false;
+                ocultarSpinner();
                 mostrarMensaje("PIN incorrecto. Inténtalo de nuevo.", "error");
             }
         } else {
@@ -2131,12 +2220,15 @@ window.validarOConfigurarPin = async function() {
             document.getElementById("formJuego").style.display = "block";
             document.getElementById("acordeonListado").style.display = "block";
             await cargarJuegos();
+            await inicializarArchivoUltimasConexionesTodosSocios();
             await comprobarActualizacionesYGuardar(nombreSocio);
             procesandoOperacion = false;
+            ocultarSpinner();
             mostrarMensaje("PIN creado y dispositivo vinculado.", "exito");
         }
     } catch (error) {
         procesandoOperacion = false;
+        ocultarSpinner();
         console.error("Error PIN:", error);
         mostrarMensaje("Error al procesar el PIN.", "error");
     }
@@ -2144,6 +2236,8 @@ window.validarOConfigurarPin = async function() {
 
 async function comprobarActualizacionesYGuardar(nombreSocio) {
     try {
+        actualizarAlertaInscripciones(nombreSocio);
+
         const idDocSocio = sanitizarId(nombreSocio);
         const refUltimaConexion = doc(db, "ultimas_conexiones_juegos", idDocSocio);
         let snapConexion = null;
@@ -2156,6 +2250,8 @@ async function comprobarActualizacionesYGuardar(nombreSocio) {
         const ahoraTimestamp = Date.now();
         let juegosNuevos = [];
         let participantesAltasBajas = [];
+        let juegosCompletosNuevos = [];
+        let juegosEliminadosNombres = [];
 
         const juegosInscritosActuales = juegos.filter(j => {
             const parts = j.participantes || [];
@@ -2167,14 +2263,27 @@ async function comprobarActualizacionesYGuardar(nombreSocio) {
             const datosConexion = snapConexion.data();
             const ultimaVez = datosConexion.timestamp || 0;
             const participantesPreviosMap = datosConexion.participantesMap || {};
+            juegosEliminadosNombres = datosConexion.juegosEliminados || [];
 
             juegosNuevos = juegos.filter(j => {
                 return esDeEstaSemana(j.fechaRegistro, nombreSocio) && (j.timestamp || 0) > ultimaVez && j.socio !== nombreSocio;
             });
 
             juegosInscritosActuales.forEach(j => {
-                const participantesAnteriores = participantesPreviosMap[j.id] || [];
                 const participantesActuales = j.participantes || [];
+                const maxPlazas = Number(j.jugadores) || 0;
+                const estaCompletoAhora = participantesActuales.length >= maxPlazas;
+
+                const participantesAnteriores = participantesPreviosMap[j.id] || [];
+                const estabaCompletoAntes = participantesAnteriores.length >= maxPlazas;
+
+                if (estaCompletoAhora && !estabaCompletoAntes) {
+                    juegosCompletosNuevos.push({
+                        nombreJuego: j.nombreJuego,
+                        participantes: participantesActuales,
+                        maxPlazas: maxPlazas
+                    });
+                }
 
                 participantesActuales.forEach(p => {
                     if (p !== nombreSocio && !participantesAnteriores.includes(p)) {
@@ -2197,27 +2306,24 @@ async function comprobarActualizacionesYGuardar(nombreSocio) {
 
         try {
             await setDoc(refUltimaConexion, {
+                nombre: nombreSocio,
+                grupo: obtenerDiaSocioReal(nombreSocio),
                 timestamp: ahoraTimestamp,
                 juegosInscritosIds: juegosInscritosIdsActuales,
-                participantesMap: participantesMapActual
+                participantesMap: participantesMapActual,
+                juegosEliminados: []
             }, { merge: true });
         } catch (err) {
             console.warn("No se pudo escribir en ultimas_conexiones_juegos.");
         }
 
-        const contenedorActualizaciones = document.getElementById("alertaActualizacionesNuevas");
-        const contenedorContenedorAltas = document.getElementById("contenedorAlertasAltas");
-        contenedorContenedorAltas.innerHTML = "";
-        let htmlAlertas = "";
-
-        if (juegosNuevos.length > 0) {
-            let nombresNuevos = juegosNuevos.map(j => `<b>${j.nombreJuego}</b> (propuesto por ${j.socio})`).join(", ");
-            htmlAlertas += `<div><span style="color:#0284c7; font-weight:bold;">✨ Juegos nuevos:</span> Se han propuesto nuevos juegos: ${nombresNuevos}</div>`;
-        }
-
+        const contenedorAltas = document.getElementById("contenedorAlertasAltas");
+        contenedorAltas.innerHTML = "";
         if (participantesAltasBajas.length > 0) {
             participantesAltasBajas.forEach(item => {
-                const textoAccion = item.tipo === 'alta' ? 'se ha <span style="color:#b45309; font-weight:bold;">dado de alta</span>' : 'se ha <span style="color:#dc2626; font-weight:bold;">dado de baja</span>';
+                const textoAccion = item.tipo === 'alta'
+                    ? 'se ha <span style="color:#b45309; font-weight:bold;">dado de alta</span>'
+                    : 'se ha <span style="color:#dc2626; font-weight:bold;">dado de baja</span>';
                 const divAlertaIndividual = document.createElement("div");
                 divAlertaIndividual.className = "alerta-actualizaciones-card borde-amarillo";
                 divAlertaIndividual.style.marginTop = "0";
@@ -2225,32 +2331,56 @@ async function comprobarActualizacionesYGuardar(nombreSocio) {
                     <button class="btn-cerrar-alerta-actualizacion" onclick="this.parentElement.remove()">&times;</button>
                     <div>👥 Cambios en tus juegos: <b>${item.socio}</b> ${textoAccion} en <b>${item.juego}</b></div>
                 `;
-                contenedorContenedorAltas.appendChild(divAlertaIndividual);
+                contenedorAltas.appendChild(divAlertaIndividual);
             });
         }
 
-        let juegosEliminadosNombres = JSON.parse(localStorage.getItem(`gmadrid_eliminados_${idDocSocio}`) || "[]");
-        if (juegosEliminadosNombres.length > 0) {
-            let nombresBorrados = juegosEliminadosNombres.join(", ");
-            htmlAlertas += `<div style="${htmlAlertas !== '' ? 'margin-top: 6px;' : ''}"><span style="color:#dc2626; font-weight:bold;">🗑️ Juego eliminado:</span> El juego <b>${nombresBorrados}</b> en el que participabas ha sido eliminado.</div>`;
-            localStorage.removeItem(`gmadrid_eliminados_${idDocSocio}`);
+        const contenedorNuevos = document.getElementById("alertaNuevosJuegos");
+        if (juegosNuevos.length > 0) {
+            let descripcionesNuevas = juegosNuevos.map(j => {
+                const diaJuegoPropuesto = obtenerDiaJuego(j).toLowerCase();
+                return `<b>${j.nombreJuego}</b> (propuesto por ${j.socio} para el <u>${diaJuegoPropuesto}</u>)`;
+            }).join(", ");
+
+            contenedorNuevos.innerHTML = `
+                <button class="btn-cerrar-alerta-actualizacion" onclick="this.parentElement.style.display='none'">&times;</button>
+                <div><span style="color:#0284c7; font-weight:bold;">✨ Juegos nuevos:</span> Se han propuesto nuevos juegos: ${descripcionesNuevas}</div>
+            `;
+            contenedorNuevos.style.display = "block";
+        } else {
+            contenedorNuevos.style.display = "none";
         }
 
-        if (htmlAlertas !== "") {
-            contenedorActualizaciones.innerHTML = `
+        const contenedorCompletos = document.getElementById("alertaJuegosCompletos");
+        if (juegosCompletosNuevos.length > 0) {
+            let detalleCompletos = juegosCompletosNuevos.map(c => {
+                const listaNombres = c.participantes.join(", ");
+                return `<b>${c.nombreJuego}</b> (${c.participantes.length}/${c.maxPlazas} jugadores). Participantes: <u>${listaNombres}</u>`;
+            }).join("<br>");
+
+            contenedorCompletos.innerHTML = `
                 <button class="btn-cerrar-alerta-actualizacion" onclick="this.parentElement.style.display='none'">&times;</button>
-                ${htmlAlertas}
+                <div><span style="color:#750087; font-weight:bold;">🎉 ¡Juego completo!</span> Se ha completado el cupo en los siguientes juegos en los que participas:<br>${detalleCompletos}</div>
             `;
-            if (juegosNuevos.length > 0) {
-                contenedorActualizaciones.className = "alerta-actualizaciones-card borde-azul";
-            } else if (juegosEliminadosNombres.length > 0) {
-                contenedorActualizaciones.className = "alerta-actualizaciones-card borde-rojo";
-            } else {
-                contenedorActualizaciones.className = "alerta-actualizaciones-card borde-violeta";
-            }
-            contenedorActualizaciones.style.display = "block";
+            contenedorCompletos.style.display = "block";
         } else {
-            contenedorActualizaciones.style.display = "none";
+            contenedorCompletos.style.display = "none";
+        }
+
+        const contenedorEliminados = document.getElementById("alertaJuegosEliminados");
+        if (juegosEliminadosNombres.length > 0) {
+            let nombresBorrados = juegosEliminadosNombres.join(", ");
+            contenedorEliminados.innerHTML = `
+                <button class="btn-cerrar-alerta-actualizacion" onclick="this.parentElement.style.display='none'">&times;</button>
+                <div><span style="color:#dc2626; font-weight:bold;">🗑️ Juego eliminado:</span> El juego <b>${nombresBorrados}</b> en el que participabas ha sido eliminado.</div>
+            `;
+            contenedorEliminados.style.display = "block";
+        } else {
+            contenedorEliminados.style.display = "none";
+        }
+
+        if (participantesAltasBajas.length > 0 || juegosNuevos.length > 0 || juegosCompletosNuevos.length > 0 || juegosEliminadosNombres.length > 0) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
     } catch (e) {
@@ -2269,7 +2399,7 @@ window.cargarJuegos = async function(){
 
         const grupoMartesHTML = document.getElementById("selectGrupoMartes");
         const grupoJuevesHTML = document.getElementById("selectGrupoJueves");
-        const socioActual = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+        const socioActual = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
 
         const snapshot = await getDocs(collection(db, "juegos"));
         juegos = [];
@@ -2330,7 +2460,7 @@ window.cargarJuegos = async function(){
 };
 
 window.registrarJuego = async function(){
-    const socio = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+    const socio = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
 
     if(!socio){
         mostrarMensaje("Selecciona primero tu nombre de socio.", "error");
@@ -2473,7 +2603,7 @@ window.registrarJuego = async function(){
 };
 
 window.unirseDirecto = async function(idJuego){
-    const socio = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+    const socio = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
     if(!socio) return;
 
     try {
@@ -2507,7 +2637,7 @@ window.unirseDirecto = async function(idJuego){
 };
 
 window.salirDelJuego = async function(idJuego){
-    const socio = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+    const socio = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
     if(!socio) return;
 
     try {
@@ -2530,7 +2660,7 @@ window.salirDelJuego = async function(idJuego){
 };
 
 window.eliminarJuego = async function(idJuego){
-    const socio = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+    const socio = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
     const juegoEncontrado = juegos.find(j => j.id === idJuego);
 
     if(!juegoEncontrado || juegoEncontrado.socio !== socio) {
@@ -2540,22 +2670,52 @@ window.eliminarJuego = async function(idJuego){
 
     if(confirm(`¿Estás seguro de que deseas eliminar la propuesta de "${juegoEncontrado.nombreJuego}"?`)){
         try {
+            const idDocCreador = sanitizarId(socio);
+            const participantesAfectados = new Set(
+                (juegoEncontrado.participantes || [])
+                    .filter(p => p !== socio)
+                    .map(p => sanitizarId(p))
+            );
+
             try {
                 const snapshotSociosConexion = await getDocs(collection(db, "ultimas_conexiones_juegos"));
+                const batch = writeBatch(db);
+                let hayActualizaciones = false;
+
                 snapshotSociosConexion.forEach(docSocioConexion => {
+                    const socioIdDoc = docSocioConexion.id;
+                    if (socioIdDoc === idDocCreador) return;
+
                     const dataConexion = docSocioConexion.data();
                     const idsGuardados = dataConexion.juegosInscritosIds || [];
-                    if (idsGuardados.includes(idJuego)) {
-                        const socioIdDoc = docSocioConexion.id;
-                        let listaBorrados = JSON.parse(localStorage.getItem(`gmadrid_eliminados_${socioIdDoc}`) || "[]");
-                        if (!listaBorrados.includes(juegoEncontrado.nombreJuego)) {
-                            listaBorrados.push(juegoEncontrado.nombreJuego);
-                            localStorage.setItem(`gmadrid_eliminados_${socioIdDoc}`, JSON.stringify(listaBorrados));
-                        }
+                    const estabaEnMap = dataConexion.participantesMap && Array.isArray(dataConexion.participantesMap[idJuego]) && dataConexion.participantesMap[idJuego].includes(dataConexion.nombre);
+
+                    if (participantesAfectados.has(socioIdDoc) || idsGuardados.includes(idJuego) || estabaEnMap) {
+                        batch.update(doc(db, "ultimas_conexiones_juegos", socioIdDoc), {
+                            juegosEliminados: arrayUnion(juegoEncontrado.nombreJuego)
+                        });
+                        hayActualizaciones = true;
                     }
                 });
+
+                participantesAfectados.forEach(socioIdDoc => {
+                    const existeDoc = snapshotSociosConexion.docs.some(d => d.id === socioIdDoc);
+                    if (!existeDoc) {
+                        batch.set(doc(db, "ultimas_conexiones_juegos", socioIdDoc), {
+                            timestamp: 0,
+                            juegosInscritosIds: [],
+                            participantesMap: {},
+                            juegosEliminados: [juegoEncontrado.nombreJuego]
+                        }, { merge: true });
+                        hayActualizaciones = true;
+                    }
+                });
+
+                if (hayActualizaciones) {
+                    await batch.commit();
+                }
             } catch (err) {
-                console.warn("No se pudo comprobar conexiones para notificación de borrado remota:", err);
+                console.warn("No se pudo registrar la notificación de borrado en Firebase:", err);
             }
 
             await deleteDoc(doc(db, "juegos", idJuego));
@@ -2571,7 +2731,7 @@ window.eliminarJuego = async function(idJuego){
 
 window.prepararEdicion = function(idJuego){
     const juego = juegos.find(j => j.id === idJuego);
-    const socio = localStorage.getItem('gmadrid_socio_actual') || document.getElementById("nombre").value;
+    const socio = localStorage.getItem('gmadrid_socio_actual') || localStorage.getItem('gmadrid_device_uuid') || document.getElementById("nombre").value;
 
     if(!juego || juego.socio !== socio){
         mostrarMensaje("No tienes permisos para editar esta propuesta.", "error");
