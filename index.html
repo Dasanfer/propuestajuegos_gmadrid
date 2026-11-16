@@ -634,6 +634,11 @@ button:disabled {
     box-shadow: none;
 }
 
+@keyframes barridoDesdeArriba {
+    0% { opacity: 0; transform: translate(-50%, -40px); }
+    100% { opacity: 1; transform: translate(-50%, 0); }
+}
+
 /* ALERTAS / MENSAJES FLOTANTES */
 #mensaje {
     position: fixed;
@@ -654,6 +659,7 @@ button:disabled {
     box-sizing: border-box;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    animation: barridoDesdeArriba 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .mensaje-contenido {
@@ -1587,6 +1593,11 @@ function mostrarMensaje(texto, tipo = 'exito') {
     const icono = iconos[tipo] || "";
     const textoLimpio = texto.replace(/^[✅❌⚠️ℹ️]\s*/, "");
     textoMensaje.textContent = icono ? `${icono} ${textoLimpio}` : textoLimpio;
+    
+    // Reinicia la animación de entrada si el mensaje ya estaba visible
+    mensaje.style.animation = 'none';
+    mensaje.offsetHeight;
+    mensaje.style.animation = '';
     mensaje.style.display = "block";
 
     let colorTexto = "";
