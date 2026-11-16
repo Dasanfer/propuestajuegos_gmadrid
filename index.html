@@ -1115,7 +1115,7 @@ details.container[open] summary::before { content: "▼ "; }
             <label><b>Acción *</b></label>
             <div class="acciones-container">
                 <label class="opcion-card" style="margin-top: 0 !important;" onclick="actualizarEstiloSeleccionRadio('accion')">
-                    <input type="radio" name="accion" value="nuevo" checked onchange="cambiarAccion()">
+                    <input type="radio" name="accion" value="nuevo" onchange="cambiarAccion()">
                     <span class="opcion-texto">➕ Añadir juego de mesa</span>
                 </label>
                 <label class="opcion-card" style="margin-top: 0 !important;" onclick="actualizarEstiloSeleccionRadio('accion')">
@@ -1125,7 +1125,7 @@ details.container[open] summary::before { content: "▼ "; }
             </div>
         </div>
 
-        <div id="bloqueNuevoJuego" style="margin-top: 14px;">
+        <div id="bloqueNuevoJuego" style="display:none; margin-top: 14px;">
             <label><b>Nombre del juego *</b></label>
             <input type="text" id="nombreJuego" placeholder="Ej: Rebel Princess">
 
@@ -1172,7 +1172,7 @@ details.container[open] summary::before { content: "▼ "; }
             </select>
         </div>
 
-        <button id="btnRegistrar" onclick="registrarJuego()">Registrar propuesta de juego de mesa</button>
+        <button id="btnRegistrar" style="display:none;" onclick="registrarJuego()">Registrar propuesta de juego de mesa</button>
         <button id="btnCancelarEdicion" class="btn-cancelar-edicion" style="display:none;" onclick="cancelarEdicion()">Cancelar edición</button>
     </div>
 </div>
@@ -1956,12 +1956,22 @@ window.copiarListaParticipantes = function(idDocumento) {
 };
 
 function cambiarAccion(){
-    const accion = document.querySelector('input[name="accion"]:checked').value;
+    const accionInput = document.querySelector('input[name="accion"]:checked');
     const bloqueNuevo = document.getElementById("bloqueNuevoJuego");
     const bloqueUnirse = document.getElementById("bloqueUnirse");
     const btnRegistrar = document.getElementById("btnRegistrar");
 
     ocultarMensaje();
+
+    if (!accionInput) {
+        bloqueNuevo.style.display = "none";
+        bloqueUnirse.style.display = "none";
+        btnRegistrar.style.display = "none";
+        return;
+    }
+
+    const accion = accionInput.value;
+    btnRegistrar.style.display = "block";
 
     if (accion === "nuevo") {
         bloqueNuevo.style.display = "block";
@@ -2485,11 +2495,17 @@ window.registrarJuego = async function(){
         return;
     }
 
+    const accionInput = document.querySelector('input[name="accion"]:checked');
+    if (!accionInput) {
+        mostrarMensaje("Selecciona una acción primero.", "advertencia");
+        return;
+    }
+
     const btnRegistrar = document.getElementById("btnRegistrar");
     btnRegistrar.disabled = true;
     btnRegistrar.textContent = "Guardando...";
 
-    const accion = document.querySelector('input[name="accion"]:checked').value;
+    const accion = accionInput.value;
 
     if (accion === "unirse") {
         const idJuego = document.getElementById("juegoExistente").value;
@@ -2759,6 +2775,7 @@ window.prepararEdicion = function(idJuego){
     idJuegoEditando = idJuego;
 
     document.querySelector('input[name="accion"][value="nuevo"]').checked = true;
+    actualizarEstiloSeleccionRadio('accion');
     cambiarAccion();
     document.getElementById("contenedorAccionesRadio").style.display = "none";
 
@@ -2788,7 +2805,8 @@ window.prepararEdicion = function(idJuego){
 window.cancelarEdicion = function(){
     idJuegoEditando = null;
     document.getElementById("contenedorAccionesRadio").style.display = "block";
-    document.querySelector('input[name="accion"][value="nuevo"]').checked = true;
+    document.querySelectorAll('input[name="accion"]').forEach(r => r.checked = false);
+    actualizarEstiloSeleccionRadio('accion');
     cambiarAccion();
 
     document.getElementById("nombreJuego").value = "";
